@@ -14,7 +14,7 @@ CORS(app, resources={r'/*':{'origins':'*'}})
 #Sanity check route
 @app.route('/ping', methods=['GET'])
 def ping():
-    return jsonify('ping!')
+    return jsonify('pong!')
 
 if __name__ == "__main__":
     app.run()
