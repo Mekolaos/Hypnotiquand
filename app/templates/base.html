@@ -20,11 +20,17 @@
         </style>
         <nav>
             <div class="nav-wrapper grey darken-4 valign-wrapper">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Schedule.png') }}" alt=""></a></li>
+                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Music.png') }}" alt=""></a></li>
+                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Sheets.png') }}" alt=""></a></li>
+                </ul>
                 <a href="#" class="brand-logo center" id="Hypnologo"> <p  class="white-text">Hypnotica</p></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Home.png') }}" alt="Home"></a></li>
                     <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Login.png') }}" alt="Login"></a></li>
                 </ul>
+                
             </div>
         </nav>
         
