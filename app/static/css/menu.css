@@ -1,4 +1,9 @@
+@font-face{
+    font-family: "metal";
+    src: url('../fonts/metal_lord.ttf');
+}
+
 #Hypnologo {
-    font-family: metal;
+    font-family: 'metal';
     font-size: 90;
 }
