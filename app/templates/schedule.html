@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block js_css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/4.2.0/bootstrap/main.min.js"></script>
+    <script src="{{ url_for('static', filename='js/schedule.js') }}"></script>
+{% endblock js_css %}
+
+{% block content %}
+    <div id="calendar"></div>
+{% endblock content %}

@@ -7,6 +7,9 @@
         {% endif %}
         <link rel="icon" href="{{ url_for('static', filename='Images/hypnotica.png') }}" type="image/png">
         <link rel="stylesheet" href="{{ url_for('static', filename='materialize/css/materialize.css') }}">
+        {% block js_css %}
+        
+        {% endblock js_css %}
         <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
         <script src="{{ url_for('static', filename='materialize/js/materialize.js') }}"></script>
     </head>
@@ -22,17 +25,21 @@
         <nav>
             <div class="nav-wrapper grey darken-4 valign-wrapper">
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
-                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Home.png') }}" alt="Home"></a></li>
+                    <li><a href="/index"><img src="{{ url_for('static', filename='Images/icons/Home.png') }}" alt="Home"></a></li>
                     <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Login.png') }}" alt="Login"></a></li>
                 </ul>
                 <ul id="nav-mobile" class="hide-on-med-and-down right" style="margin-left: 70%;">
-                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Schedule.png') }}" alt="Schedule"></a></li>
+                    <li><a href="/schedule"><img src="{{ url_for('static', filename='Images/icons/Schedule.png') }}" alt="Schedule"></a></li>
                     <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Music.png') }}" alt="Music"></a></li>
-                    <li><a href="#"><img src="{{ url_for('static', filename='Images/icons/Sheets.png') }}" alt="Sheets"></a></li>
+                    <li><a href="/composer"><img src="{{ url_for('static', filename='Images/icons/Sheets.png') }}" alt="Composer"></a></li>
                 </ul>
-                <a href="#" class="brand-logo center" id="Hypnologo"> <p  class="white-text">Hypnotica</p></a>   
+                <p class="white-text"></p><a href="/index" class="brand-logo center" id="Hypnologo"> Hypnotica</a></p>   
             </div>
         </nav>
         
+        {% block content %}
+        
+        {% endblock content %}
+
     </body>
 </html>

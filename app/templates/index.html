@@ -1,1 +1,16 @@
 {% extends 'base.html' %}
+
+{% block js_css %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock js_css %}
+
+{% block content %}
+<div class="carousel">
+  <a class="carousel-item" href="#one!"><img class="materialboxed" src="{{ url_for('static', filename='Images/Shows/1.jpg') }}"" alt=""></a>
+  <a class="carousel-item" href="#two!"><img class="materialboxed" src="{{ url_for('static', filename='Images/Shows/2.jpg') }}"" alt=""></a>
+  <a class="carousel-item" href="#three!"><img class="materialboxed" src="{{ url_for('static', filename='Images/Shows/3.jpg') }}"" alt=""></a>
+  <a class="carousel-item" href="#"><img class="materialboxed" src="{{ url_for('static', filename='Images/Shows/4.jpg') }}"" alt=""></a>
+  <a class="carousel-item" href="#five!"><img class="materialboxed" src="{{ url_for('static', filename='Images/Shows/5.jpg') }}" alt=""></a>
+</div>
+
+{% endblock content %}
