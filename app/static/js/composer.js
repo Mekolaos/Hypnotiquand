@@ -1,65 +1,74 @@
+// Initializing all base variables
 var notes = ['e', 'B', 'G', 'D', 'A', 'E']
-var c = document.getElementById("composer-view");
-var ctx = c.getContext("2d");
+var elem = document.getElementById('draw-group');
+var two = new Two({ width: 600, height: 200 }).appendTo(elem);
+var frets = new Array;
 
-ctx.beginPath();
-ctx.font = "11px Arial";
-ctx.fillStyle = "rgba(0, 0, 0, 0.8)"
-ctx.strokeStyle = "rgba(0, 0, 0, 0.5)";
-
-function drawFromTo(x,y, z, w){
-    ctx.moveTo(x, y);
-    ctx.lineTo(z, w)
+for (let fret = 0; fret < 25; fret++) {
+    frets.push(fret.toString())    
 }
 
-function drawLines(distance) {
-    for (let i = 0; i < 6; i++) {
-        var dist = distance * (i+1)
-        ctx.moveTo(18, dist);
-        ctx.lineTo(500, dist);
-        ctx.fillText(notes[i], 5, dist + (distance / 7));
-        
+// Creating an array to store drawing data. Styles for the text's style.
+var styles = {"size":13, "fill": "rgba(0,0,0,0.5)", "style":"bold", "family":"sans-serif"}
+var tablature = new Array;
+
+// Draws the first bar of our tablature.
+// Parameter is an int. Number of pixel for the interval between the tab lines.
+// TODO: Make it dynamic depending on number of notes/subdivision/time signature.
+function draw_first_bar_of_tab(distance){
+    for (let i = 0; i < notes.length; i++) {
+        var dist = i+1;
+        var line = two.makePath(20, dist * distance, 180, dist * distance);
+        line.linewidth = 2;
+        line.opacity = 0.4;
+        tablature.push(two.makeText(notes[i], 10, dist *distance, styles));
+        tablature.push(line);
     }
-};
-drawLines(15);
-ctx.moveTo(500, 15)
-ctx.lineTo(500, 15*6)
-ctx.closePath()
-
-ctx.stroke()
-
-window.addEventListener("keyup", moveSomething, false);
-var deltaX = 0;
-var deltaY = 0;
-
-
-function drawSelector(){
-    ctx.beginPath();
-    drawFromTo(25 + deltaX, 10 + deltaY, 35 + deltaX, 10 + deltaY);
-    drawFromTo(25 + deltaX, 10 + deltaY, 25 + deltaX, 20 + deltaY);
-    drawFromTo(25 + deltaX, 20 + deltaY, 35 + deltaX, 20 + deltaY);
-    drawFromTo(35 + deltaX, 20 + deltaY, 35 + deltaX, 10 + deltaY);
-    ctx.closePath();
-    
-    ctx.stroke()
+    var endline = two.makePath(181, 15, 181, 90);
+    endline.linewidth = 2;
+    endline.opacity = 0.5;
+    tablature.push(endline)
 }
-drawSelector()
+draw_first_bar_of_tab(15)
+var selectionSquare = two.makeRectangle(40, 140, 15, 15);
+selectionSquare.fill = "yellow";
+selectionSquare.opacity = 0.5;
+selectionSquare.translation = new Two.Vector(40, 140);
 
-function moveSomething(e) {
-    switch(e.keyCode) {
-        case 37: // left
-            deltaX -= 15;
-            break;
-        case 38: // up
-            deltaY -= 15;
-            break;
-        case 39: // right
-            deltaX += 15;
-            break;
-        case 40: // down
-            deltaY += 15;
-            break;
-    }
-    drawSelector();
+// Group of first bar's drawing data.
+var group = two.makeGroup(tablature);
+group.translation.set(0, two.height / 4);
+group.scale = 1;
+
+document.onkeydown = function move(e) {
+    e = e || window.event;
+
+    switch (e.keyCode) {
+        case 37:
+            selectionSquare.translation.x -= 40;
+            console.log('Left key pressed');
+           break;
+        case 38:
+            selectionSquare.translation.y -= 15;
+             console.log('Up key pressed');
+           break;
+        case 39:
+            selectionSquare.translation.x += 40;
+             console.log('Right key pressed');
+           break;
+        case 40:
+            selectionSquare.translation.y += 15;
+             console.log('Down key pressed');
+           break;
+     }
+     this.onkeypress= function(ev){
+        if(frets.includes(String.fromCharCode(ev.keyCode))) {
+            two.makeText(String.fromCharCode(ev.keyCode), selectionSquare.translation.x, selectionSquare.translation.y)
+            two.update()
+        }
+     }
+     
+     two.update();
 }
 
+two.update();

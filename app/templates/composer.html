@@ -1,14 +1,12 @@
 {% extends 'base.html' %}
 
 {% block js_css %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vexflow/1.2.89/vexflow-min.js"></script> 
+<script src="{{ url_for('static', filename='two/two.min.js') }}"></script> 
 {% endblock js_css %}
 
 {% block content %}
-<!-- <div class="col s12 m12 l12 center">
-    <canvas id="composer-view" width="600" height="240" style="border: 1px solid #c1c1c1; margin-top:13;"></canvas>
-</div> -->
-<div id="boo"></div>
+
+<div id="draw-group" class="center"></div>
 
 <script src="{{ url_for('static', filename='js/composer.js') }}"></script>
 {% endblock content %}
